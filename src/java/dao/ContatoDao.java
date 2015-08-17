@@ -1,4 +1,4 @@
-package jdbc.dao;
+package dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.ConnectionFactory;
-import jdbc.model.Contato;
+import model.Contato;
 
 public class ContatoDao {
 

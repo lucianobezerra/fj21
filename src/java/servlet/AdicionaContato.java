@@ -1,18 +1,19 @@
 package servlet;
 
+import dao.ContatoDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import jdbc.dao.ContatoDao;
-import jdbc.model.Contato;
+import model.Contato;
 
 @WebServlet(name = "AdicionaContato", urlPatterns = {"/adicionaContato"})
 public class AdicionaContato extends HttpServlet {
@@ -40,12 +41,8 @@ public class AdicionaContato extends HttpServlet {
     contato.setDataNascimento(dataNascimento);
     ContatoDao dao = new ContatoDao();
     dao.adiciona(contato);
-    
-    out.println("<html>");
-    out.println("<body>");
-    out.println("Contato: " + contato.getNome() + " Adicionado com Sucesso!");
-    out.println("</body>");
-    out.println("</html>");
+    RequestDispatcher rd = request.getRequestDispatcher("/contato-adicionado.jsp");
+    rd.forward(request, response);
   }
 
   // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -1,4 +1,4 @@
-package jdbc.dao;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.ConnectionFactory;
-import jdbc.model.Funcionario;
+import model.Funcionario;
 
 public class FuncionarioDao {
 
