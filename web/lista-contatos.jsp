@@ -16,6 +16,9 @@
       <display:column property="email"    title="Email" autolink="true" />
       <display:column property="endereco" title="Endereço"/>
       <display:column property="dataNascimento.time" title="Nascimento" format="{0, date, dd/MM/yyyy }"/>
+      <display:column >
+        <a href="mvc?logica=RemoveContato&id=${contatos.id}">Excluir</a>
+      </display:column>
     </display:table>
     <c:import url="rodape.jsp" />
   </body>
