@@ -14,7 +14,7 @@
     <c:import url="cabecalho.jsp" />
     <h1>Adiciona Contato</h1>
     <hr/>
-    <form action="adicionaContato" method="post">
+    <form action="gravaContato" method="post">
       Nome: <input type="text" name="nome" /><br/>
       E-Mail: <input type="text" name="email" /><br/>
       Endereço: <input type="text" name="endereco" /><br/>

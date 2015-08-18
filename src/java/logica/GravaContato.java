@@ -1,4 +1,4 @@
-package servlet;
+package logica;
 
 import dao.ContatoDao;
 import java.io.IOException;
@@ -15,33 +15,39 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Contato;
 
-@WebServlet(name = "AdicionaContato", urlPatterns = {"/adicionaContato"})
-public class AdicionaContato extends HttpServlet {
+@WebServlet(name = "GravaContato", urlPatterns = {"/gravaContato"})
+public class GravaContato extends HttpServlet {
 
   protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     response.setContentType("text/html;charset=UTF-8");
     PrintWriter out = response.getWriter();
-    String nome     = request.getParameter("nome");
+    long id = Long.parseLong(request.getParameter("id"));
+    String nome = request.getParameter("nome");
     String endereco = request.getParameter("endereco");
-    String email    = request.getParameter("email");
-    String dataTexto= request.getParameter("dataNascimento");
+    String email = request.getParameter("email");
+    String dataTexto = request.getParameter("dataNascimento");
     Calendar dataNascimento = null;
-    try{
+    try {
       Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dataTexto);
       dataNascimento = Calendar.getInstance();
       dataNascimento.setTime(date);
-    }catch(ParseException e){
+    } catch (ParseException e) {
       out.println("Erro na conversão da data");
       return;
     }
     Contato contato = new Contato();
+    contato.setId(id);
     contato.setNome(nome);
     contato.setEndereco(endereco);
     contato.setEmail(email);
     contato.setDataNascimento(dataNascimento);
     ContatoDao dao = new ContatoDao();
-    dao.adiciona(contato);
-    RequestDispatcher rd = request.getRequestDispatcher("/contato-adicionado.jsp");
+    if (Long.valueOf(id) == null) {
+      dao.adiciona(contato);
+    } else {
+      dao.altera(contato);
+    }
+    RequestDispatcher rd = request.getRequestDispatcher("mvc?logica=ListaContatos");
     rd.forward(request, response);
   }
 
